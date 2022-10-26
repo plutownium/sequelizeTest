@@ -59,7 +59,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             },
             {
                 timestamps: true,
-                sequelize: sequelizeConnection,
+                sequelize: sequelize,
                 paranoid: false,
             },
         );

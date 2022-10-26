@@ -58,7 +58,7 @@ export class RefreshToken extends Model<RefreshTokenAttributes, RefreshTokenCrea
             },
             {
                 timestamps: true,
-                sequelize: sequelizeConnection,
+                sequelize: sequelize,
                 paranoid: true,
             },
         );

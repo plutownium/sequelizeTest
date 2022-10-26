@@ -6,7 +6,9 @@ class UserDAO {
     constructor() {}
 
     public createUser = async (email: string, firstName: string) => {
-        return await User.create({ email, firstName }); // q: does it receive an id?
+        const u = await User.create({ email: email, firstName: firstName });
+        console.log(u, "10rm");
+        return u;
     };
 
     public getAllUsers = async () => {

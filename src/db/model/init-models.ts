@@ -12,3 +12,5 @@ function initModels(s: Sequelize) {
 
     return { user: u, refreshToken: rt };
 }
+
+export default initModels;
