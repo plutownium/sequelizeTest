@@ -1,30 +1,31 @@
-import Sequelize, { DataTypes, Sequelize as S, Model, Optional } from "sequelize";
+import Sequelize, { DataTypes, Sequelize as S, Model, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
 
 import sequelizeConnection from "../Database";
 
 import { User, UserId } from "./User";
 
-interface RefreshTokenAttributes {
-    id?: number;
-    token: string;
-    isActive: boolean;
-    expires: Date;
-    createdAt?: Date;
-    updatedAt?: Date;
-    deletedAt?: Date;
-}
+// interface RefreshTokenAttributes {
+//     id?: number;
+//     token: string;
+//     isActive: boolean;
+//     expires: Date;
+//     createdAt?: Date;
+//     updatedAt?: Date;
+//     deletedAt?: Date;
+// }
 
 export type RefreshTokenPk = "id";
 export type RefreshTokenId = RefreshToken[RefreshTokenPk];
 
-export type RefreshTokenOptionalAttributes = "createdAt" | "updatedAt" | "deletedAt";
-export type RefreshTokenCreationAttributes = Optional<RefreshTokenAttributes, RefreshTokenOptionalAttributes>;
-
-export class RefreshToken extends Model<RefreshTokenAttributes, RefreshTokenCreationAttributes> implements RefreshTokenAttributes {
+export class RefreshToken extends Model<InferAttributes<RefreshToken>, InferCreationAttributes<RefreshToken>> {
     public id!: number;
+    public userId!: ForeignKey<number>;
+    //   }
+    // public id!: number;
     public token!: string;
     public isActive!: boolean;
     public expires!: Date;
+    // public userId!: ForeignKey<number>;
 
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
@@ -60,6 +61,7 @@ export class RefreshToken extends Model<RefreshTokenAttributes, RefreshTokenCrea
                 timestamps: true,
                 sequelize: sequelize,
                 paranoid: true,
+                modelName: "rt",
             },
         );
     }

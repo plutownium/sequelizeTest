@@ -15,7 +15,7 @@ class RTController {
         this.router.get("/", this.getAllRefreshTokens.bind(this));
         this.router.get("/by_token", this.getTokenByToken.bind(this));
         this.router.get("/by_user_id", this.getTokenByUserId.bind(this));
-        this.router.post("/create", this.createToken.bind(this));
+        this.router.post("/create", this.createTokenForUser.bind(this));
         this.router.delete("/token", this.deleteToken.bind(this));
     }
     public healthCheck(req: Request, res: Response) {
@@ -43,10 +43,11 @@ class RTController {
         return res.json({ token: f });
     }
 
-    public async createToken(req: Request, res: Response) {
+    public async createTokenForUser(req: Request, res: Response) {
         //
+        const userId = req.body.userId;
         const tokenString = "someString" + Math.floor(Math.random() * 10000).toString();
-        const newToken = await this.rtDAO.createToken(tokenString);
+        const newToken = await this.rtDAO.createToken(userId, tokenString);
         // todo: mk have user attached
         return res.json({ token: newToken });
     }
