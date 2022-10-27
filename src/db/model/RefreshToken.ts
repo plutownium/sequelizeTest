@@ -4,34 +4,18 @@ import sequelizeConnection from "../Database";
 
 import { User, UserId } from "./User";
 
-// interface RefreshTokenAttributes {
-//     id?: number;
-//     token: string;
-//     isActive: boolean;
-//     expires: Date;
-//     createdAt?: Date;
-//     updatedAt?: Date;
-//     deletedAt?: Date;
-// }
-
-export type RefreshTokenPk = "id";
+export type RefreshTokenPk = "tokenId";
 export type RefreshTokenId = RefreshToken[RefreshTokenPk];
 
 export class RefreshToken extends Model<InferAttributes<RefreshToken>, InferCreationAttributes<RefreshToken>> {
-    public id!: number;
-    public userId!: ForeignKey<number>;
+    public tokenId!: number;
+    public userId!: ForeignKey<User["userId"]>;
     //   }
     // public id!: number;
     public token!: string;
     public isActive!: boolean;
     public expires!: Date;
-    // public userId!: ForeignKey<number>;
 
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
-    public readonly deletedAt!: Date;
-
-    // RefreshToken belongsTo User via refresh_token_owner_id <= lying comment probably
     declare getUser: Sequelize.BelongsToGetAssociationMixin<User>;
     declare setUser: Sequelize.BelongsToSetAssociationMixin<User, UserId>;
     declare createUser: Sequelize.BelongsToCreateAssociationMixin<User>;
@@ -39,7 +23,7 @@ export class RefreshToken extends Model<InferAttributes<RefreshToken>, InferCrea
     static initModel(sequelize: S): typeof RefreshToken {
         return RefreshToken.init(
             {
-                id: {
+                tokenId: {
                     type: DataTypes.INTEGER,
                     autoIncrement: true,
                     primaryKey: true,

@@ -19,7 +19,8 @@ class App {
         this.app.use(express.json());
         this.db = db;
         this.initModels(this.db);
-        this.db.sync();
+        this.db.sync({ force: true });
+        // this.db.sync({ force: false });
         // this.middlewares(appInit.middlewares);
         this.controllers(appInit.controllers);
         // this.app.use("/api", getRoutes());

@@ -6,11 +6,13 @@ function initModels(s: Sequelize) {
     const u = User.initModel(s);
     const rt = RefreshToken.initModel(s);
 
+    console.log("init models!");
     u.hasMany(rt, {
         foreignKey: {
             name: "userId",
             // type: DataTypes.UUID,
         },
+        as: "user_id",
     });
 
     rt.belongsTo(u, {
@@ -18,6 +20,7 @@ function initModels(s: Sequelize) {
             name: "RTId",
             // type: DataTypes.UUID,
         },
+        as: "rt_id",
     });
 
     return { user: u, refreshToken: rt };

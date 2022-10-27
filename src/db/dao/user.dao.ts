@@ -23,7 +23,7 @@ class UserDAO {
 
     public getUserByUserId = async (userId: string) => {
         //
-        const user = await User.findOne({ where: { id: userId } });
+        const user = await User.findOne({ where: { userId: userId } });
         return user;
     };
 }
