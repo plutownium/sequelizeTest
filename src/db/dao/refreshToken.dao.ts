@@ -8,19 +8,12 @@ class RTDAO {
 
     public createToken = async (userId: number, tokenString: string) => {
         const later = new Date();
-        console.log("input id:", userId, "11rm");
-        // const forUser = await User.findOne({ where: { userId: id } });
-        // if (!forUser) throw new Error("No user found for this id");
-        const payload = {
-            // tokenId: 0,
-        };
         const newRT = await RefreshToken.create({ token: tokenString, isActive: true, expires: later, userId: userId });
-        const updated = await User.update({ tokenId: newRT.tokenId }, { where: { userId: userId } });
         return newRT;
     };
 
     public getAllTokens = async () => {
-        const tokens: RefreshToken[] = await RefreshToken.findAll({ include: ["user_id_thing"] });
+        const tokens: RefreshToken[] = await RefreshToken.findAll({ include: ["belongs_to_user"] });
         return tokens;
     };
 

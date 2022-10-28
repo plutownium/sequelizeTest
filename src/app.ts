@@ -35,7 +35,6 @@ class App {
 
     private initModels(db: Sequelize) {
         const models = initModels(db);
-        console.log(models, "36rm");
     }
 
     // private middlewares(middlewares: any) {
@@ -46,7 +45,6 @@ class App {
 
     private controllers(controllers: any) {
         controllers.forEach((c: any) => {
-            console.log(c.path, "32rm");
             this.app.use(c.path, c.router);
         });
     }

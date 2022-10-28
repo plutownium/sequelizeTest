@@ -7,7 +7,7 @@ interface RefreshTokenAttributes {
     token: string;
     isActive: boolean;
     expires: Date;
-    userId: number;
+    userId?: number;
 }
 
 type RefreshTokenCreationAttributes = Optional<RefreshTokenAttributes, "tokenId">;

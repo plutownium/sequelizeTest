@@ -18,7 +18,6 @@ class UserController {
     }
 
     public healthCheck(req: Request, res: Response) {
-        console.log(req.body, "20rm");
         return res.json({ msg: "on - users" });
     }
 
@@ -43,11 +42,8 @@ class UserController {
     }
 
     public async createUser(req: Request, res: Response) {
-        console.log(req.body.email, "43rm");
-        console.log(this, "41rm");
         const e = req.body.email;
         const fn = req.body.firstName;
-        console.log(e, fn, "44rm");
         const a = await this.uDAO.createUser(e, fn);
         return res.json({ user: a });
     }
