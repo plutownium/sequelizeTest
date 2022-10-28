@@ -15,12 +15,12 @@ class RTDAO {
             // tokenId: 0,
         };
         const newRT = await RefreshToken.create({ token: tokenString, isActive: true, expires: later, userId: userId });
+        const updated = await User.update({ tokenId: newRT.tokenId }, { where: { userId: userId } });
         return newRT;
     };
 
     public getAllTokens = async () => {
-        // const tokens: RefreshToken[] = await RefreshToken.findAll({ include: ["userId"] });
-        const tokens: RefreshToken[] = await RefreshToken.findAll({ include: ["user_id"] });
+        const tokens: RefreshToken[] = await RefreshToken.findAll({ include: ["user_id_thing"] });
         return tokens;
     };
 

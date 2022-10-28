@@ -12,14 +12,9 @@ interface RefreshTokenAttributes {
 
 type RefreshTokenCreationAttributes = Optional<RefreshTokenAttributes, "tokenId">;
 
-export type RefreshTokenPk = "tokenId";
-export type RefreshTokenId = RefreshToken[RefreshTokenPk];
-
 export class RefreshToken extends Model<InferAttributes<RefreshToken>, RefreshTokenCreationAttributes> {
     public tokenId!: number;
     public userId!: ForeignKey<User["userId"]>;
-    //   }
-    // public id!: number;
     public token!: string;
     public isActive!: boolean;
     public expires!: Date;
@@ -46,9 +41,7 @@ export class RefreshToken extends Model<InferAttributes<RefreshToken>, RefreshTo
                 },
             },
             {
-                timestamps: true,
                 sequelize: sequelize,
-                paranoid: true,
                 modelName: "rt",
             },
         );

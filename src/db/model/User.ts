@@ -1,4 +1,5 @@
-import Sequelize, { DataTypes, Sequelize as S, Model, Optional, InferAttributes, InferCreationAttributes } from "sequelize";
+import Sequelize, { DataTypes, Sequelize as S, Model, Optional, InferAttributes, InferCreationAttributes, ForeignKey } from "sequelize";
+import RefreshToken from "./RefreshToken";
 
 export type UserPk = "userId";
 export type UserId = User[UserPk];
@@ -7,6 +8,7 @@ interface UserAttributes {
     userId: number;
     email: string;
     firstName: string;
+    tokenId?: number;
 }
 
 type UserCreationAttributes = Optional<UserAttributes, "userId">;
@@ -15,6 +17,7 @@ export class User extends Model<InferAttributes<User>, UserCreationAttributes> {
     public userId!: number;
     public email!: string;
     public firstName!: string;
+    public tokenId!: ForeignKey<RefreshToken["tokenId"]>;
 
     static initModel(sequelize: S): typeof User {
         return User.init(
@@ -34,9 +37,7 @@ export class User extends Model<InferAttributes<User>, UserCreationAttributes> {
                 },
             },
             {
-                timestamps: true,
                 sequelize: sequelize,
-                paranoid: false,
                 modelName: "user",
             },
         );

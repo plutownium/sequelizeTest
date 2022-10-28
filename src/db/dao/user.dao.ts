@@ -12,8 +12,7 @@ class UserDAO {
     };
 
     public getAllUsers = async () => {
-        //
-        const users = await User.findAll({});
+        const users = await User.findAll({ include: "rt_m" });
         return users;
     };
 
