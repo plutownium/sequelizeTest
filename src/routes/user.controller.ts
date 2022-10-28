@@ -12,6 +12,7 @@ class UserController {
         this.router.get("/", this.getAllUsers.bind(this));
         this.router.get("/by_id", this.getUserById.bind(this));
         this.router.get("/by_token", this.getUserByToken.bind(this));
+        this.router.get("/with_tokens", this.getUsersWithTokens.bind(this));
         this.router.post("/create", this.createUser.bind(this));
         this.router.delete("/user", this.deleteUser.bind(this));
     }
@@ -34,6 +35,11 @@ class UserController {
     public async getUserByToken(req: Request, res: Response) {
         const a = await this.uDAO.getUserByToken(req.body.token);
         return res.json({ user: a });
+    }
+
+    public async getUsersWithTokens(req: Request, res: Response) {
+        const a = await this.uDAO.getUsersWithTokens();
+        return res.json({ users: a });
     }
 
     public async createUser(req: Request, res: Response) {

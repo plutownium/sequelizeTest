@@ -1,7 +1,5 @@
 import Sequelize, { DataTypes, Sequelize as S, Model, Optional, InferAttributes, InferCreationAttributes } from "sequelize";
 
-import { RefreshToken } from "./RefreshToken";
-
 export type UserPk = "userId";
 export type UserId = User[UserPk];
 
@@ -17,17 +15,6 @@ export class User extends Model<InferAttributes<User>, UserCreationAttributes> {
     public userId!: number;
     public email!: string;
     public firstName!: string;
-
-    // declare getUser: Sequelize.HasManyGetAssociationsMixin<RefreshToken>;
-    // declare setRefreshToken: Sequelize.HasManySetAssociationsMixin<RefreshToken, RefreshTokenId>;
-    // declare addRefreshToken: Sequelize.HasManyAddAssociationMixin<RefreshToken, RefreshTokenId>;
-    // declare addRefreshTokens: Sequelize.HasManyAddAssociationsMixin<RefreshToken, RefreshTokenId>;
-    // declare createRefreshToken: Sequelize.HasManyCreateAssociationMixin<RefreshToken>;
-    // declare removeRefreshToken: Sequelize.HasManyRemoveAssociationMixin<RefreshToken, RefreshTokenId>;
-    // declare removeRefreshTokens: Sequelize.HasManyRemoveAssociationsMixin<RefreshToken, RefreshTokenId>;
-    // declare hasRefreshToken: Sequelize.HasManyHasAssociationMixin<RefreshToken, RefreshTokenId>;
-    // declare hasRefreshTokens: Sequelize.HasManyHasAssociationsMixin<RefreshToken, RefreshTokenId>;
-    // declare countRefreshTokens: Sequelize.HasManyCountAssociationsMixin;
 
     static initModel(sequelize: S): typeof User {
         return User.init(
@@ -57,3 +44,14 @@ export class User extends Model<InferAttributes<User>, UserCreationAttributes> {
 }
 
 export default User;
+
+// declare getUser: Sequelize.HasManyGetAssociationsMixin<RefreshToken>;
+// declare setRefreshToken: Sequelize.HasManySetAssociationsMixin<RefreshToken, RefreshTokenId>;
+// declare addRefreshToken: Sequelize.HasManyAddAssociationMixin<RefreshToken, RefreshTokenId>;
+// declare addRefreshTokens: Sequelize.HasManyAddAssociationsMixin<RefreshToken, RefreshTokenId>;
+// declare createRefreshToken: Sequelize.HasManyCreateAssociationMixin<RefreshToken>;
+// declare removeRefreshToken: Sequelize.HasManyRemoveAssociationMixin<RefreshToken, RefreshTokenId>;
+// declare removeRefreshTokens: Sequelize.HasManyRemoveAssociationsMixin<RefreshToken, RefreshTokenId>;
+// declare hasRefreshToken: Sequelize.HasManyHasAssociationMixin<RefreshToken, RefreshTokenId>;
+// declare hasRefreshTokens: Sequelize.HasManyHasAssociationsMixin<RefreshToken, RefreshTokenId>;
+// declare countRefreshTokens: Sequelize.HasManyCountAssociationsMixin;

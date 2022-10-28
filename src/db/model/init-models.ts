@@ -12,8 +12,8 @@ function initModels(s: Sequelize) {
         //     name: "userId",
         //     // type: DataTypes.UUID,
         // },
-        foreignKey: "userId",
-        as: "user_id",
+        // foreignKey: "rtm",
+        as: "rt_m",
     });
 
     rt.belongsTo(u, {
@@ -21,8 +21,8 @@ function initModels(s: Sequelize) {
         //     name: "RTId",
         //     // type: DataTypes.UUID,
         // },
-        foreignKey: "RTId",
-        as: "rt_id",
+        foreignKey: "userId",
+        as: "user_id",
     });
 
     return { user: u, refreshToken: rt };

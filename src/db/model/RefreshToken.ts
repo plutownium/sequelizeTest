@@ -1,21 +1,21 @@
 import Sequelize, { DataTypes, Optional, Sequelize as S, Model, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
 
-import sequelizeConnection from "../Database";
-
 import { User, UserId } from "./User";
 
 interface RefreshTokenAttributes {
     tokenId: number;
-    email: string;
-    firstName: string;
+    token: string;
+    isActive: boolean;
+    expires: Date;
+    userId: number;
 }
 
-type UserCreationAttributes = Optional<RefreshTokenAttributes, "tokenId">;
+type RefreshTokenCreationAttributes = Optional<RefreshTokenAttributes, "tokenId">;
 
 export type RefreshTokenPk = "tokenId";
 export type RefreshTokenId = RefreshToken[RefreshTokenPk];
 
-export class RefreshToken extends Model<InferAttributes<RefreshToken>, InferCreationAttributes<RefreshToken>> {
+export class RefreshToken extends Model<InferAttributes<RefreshToken>, RefreshTokenCreationAttributes> {
     public tokenId!: number;
     public userId!: ForeignKey<User["userId"]>;
     //   }
@@ -23,10 +23,6 @@ export class RefreshToken extends Model<InferAttributes<RefreshToken>, InferCrea
     public token!: string;
     public isActive!: boolean;
     public expires!: Date;
-
-    declare getUser: Sequelize.BelongsToGetAssociationMixin<User>;
-    declare setUser: Sequelize.BelongsToSetAssociationMixin<User, UserId>;
-    declare createUser: Sequelize.BelongsToCreateAssociationMixin<User>;
 
     static initModel(sequelize: S): typeof RefreshToken {
         return RefreshToken.init(
@@ -60,3 +56,7 @@ export class RefreshToken extends Model<InferAttributes<RefreshToken>, InferCrea
 }
 
 export default RefreshToken;
+
+// declare getUser: Sequelize.BelongsToGetAssociationMixin<User>;
+// declare setUser: Sequelize.BelongsToSetAssociationMixin<User, UserId>;
+// declare createUser: Sequelize.BelongsToCreateAssociationMixin<User>;
