@@ -8,18 +8,20 @@ function initModels(s: Sequelize) {
 
     console.log("init models!");
     u.hasMany(rt, {
-        foreignKey: {
-            name: "userId",
-            // type: DataTypes.UUID,
-        },
+        // foreignKey: {
+        //     name: "userId",
+        //     // type: DataTypes.UUID,
+        // },
+        foreignKey: "userId",
         as: "user_id",
     });
 
     rt.belongsTo(u, {
-        foreignKey: {
-            name: "RTId",
-            // type: DataTypes.UUID,
-        },
+        // foreignKey: {
+        //     name: "RTId",
+        //     // type: DataTypes.UUID,
+        // },
+        foreignKey: "RTId",
         as: "rt_id",
     });
 

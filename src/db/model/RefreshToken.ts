@@ -1,8 +1,16 @@
-import Sequelize, { DataTypes, Sequelize as S, Model, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
+import Sequelize, { DataTypes, Optional, Sequelize as S, Model, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
 
 import sequelizeConnection from "../Database";
 
 import { User, UserId } from "./User";
+
+interface RefreshTokenAttributes {
+    tokenId: number;
+    email: string;
+    firstName: string;
+}
+
+type UserCreationAttributes = Optional<RefreshTokenAttributes, "tokenId">;
 
 export type RefreshTokenPk = "tokenId";
 export type RefreshTokenId = RefreshToken[RefreshTokenPk];
