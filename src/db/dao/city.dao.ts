@@ -11,14 +11,19 @@ class CityDAO {
     };
 
     public getAllCities = async () => {
-        const tokens: City[] = await City.findAll({ include: Apartment });
+        const tokens: City[] = await City.findAll({ include: 'its_apartments' });
         return tokens;
     };
 
     public getCityByApartmentId = async (apartmentId: string) => {
-        const city: City[] = await City.findAll({
+        const apartment: Apartment | null = await Apartment.findOne({
             where: {
                 apartmentId: apartmentId,
+            }
+        });
+        const city: City[] = await City.findAll({
+            where: {
+                cityId: apartment?.cityId
             },
         });
         return city;

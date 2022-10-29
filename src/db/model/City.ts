@@ -1,6 +1,7 @@
 import Sequelize, { DataTypes, Optional, Sequelize as S, Model, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
 
-import { User, UserId } from "./User";
+export type CityPk = "cityId";
+export type CityId = City[CityPk];
 
 interface CityAttributes {
     cityId: number;
@@ -9,8 +10,9 @@ interface CityAttributes {
     address: string;
 }
 
-export class City extends Model<InferAttributes<City>, CityAttributes> {
-    public CityId!: number;
+export type CityCreationAttributes = Optional<CityAttributes, "cityId">;
+export class City extends Model<InferAttributes<City>, CityCreationAttributes> {
+    public cityId!: number;
     public longitude!: number;
     public latitude!: number;
     public address!: string;
@@ -18,7 +20,7 @@ export class City extends Model<InferAttributes<City>, CityAttributes> {
     static initModel(sequelize: S): typeof City {
         return City.init(
             {
-                CityId: {
+                cityId: {
                     type: DataTypes.INTEGER,
                     autoIncrement: true,
                     primaryKey: true,
@@ -38,6 +40,7 @@ export class City extends Model<InferAttributes<City>, CityAttributes> {
             },
             {
                 sequelize: sequelize,
+                modelName: "city"
             },
         );
     }

@@ -1,17 +1,17 @@
 import Apartment from "../model/Apartment";
-import City from "../model/City";
+import City, { CityCreationAttributes } from "../model/City";
 //
 
 class ApartmentDAO {
     constructor() {}
 
-    public createApartment = async (userId: number, tokenString: string) => {
-        const apartment = await Apartment.create({});
+    public createApartment = async (cityId: number, longitude: number, latitude: number, address: string) => {
+        const apartment = await Apartment.create({ cityId, longitude, latitude, address });
         return apartment;
     };
 
     public getAllApartments = async () => {
-        const apartments: Apartment[] = await Apartment.findAll({ include: City });
+        const apartments: Apartment[] = await Apartment.findAll({ include: 'belongs_to_city' });
         return apartments;
     };
 
@@ -24,9 +24,10 @@ class ApartmentDAO {
         return apartments;
     };
 
-    public bulkCreateApartmentsForCity = async(cityId: string, apartments: any[]) {
-        const createdApartments = // not sure what to write here
-    }
+    public bulkCreateApartmentsForCity = async(cityId: number, apartments: CityCreationAttributes[]) => {
+        const createdApartments: Apartment[] = await Apartment.bulkCreate(apartments.map(ap => ({ ...ap, cityId })));
+        return createdApartments;
+    };
 }
 
 export default ApartmentDAO;

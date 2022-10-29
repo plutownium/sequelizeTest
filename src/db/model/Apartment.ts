@@ -1,6 +1,9 @@
 import Sequelize, { DataTypes, Optional, Sequelize as S, Model, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
+import City from "./City";
 
-import { User, UserId } from "./User";
+
+export type ApartmentPk = "apartmentId";
+export type ApartmentId = Apartment[ApartmentPk];
 
 interface ApartmentAttributes {
     apartmentId: number;
@@ -10,14 +13,14 @@ interface ApartmentAttributes {
     cityId?: number;
 }
 
-type ApartmentCreationAttributes = Optional<ApartmentAttributes, "cityId">;
+type ApartmentCreationAttributes = Optional<ApartmentAttributes, "apartmentId">;
 
 export class Apartment extends Model<InferAttributes<Apartment>, ApartmentCreationAttributes> {
     public apartmentId!: number;
     public longitude!: number;
     public latitude!: number;
     public address!: string;
-    public cityId!: ForeignKey<User["cityId"]>;
+    public cityId!: ForeignKey<City["cityId"]>;
 
     static initModel(sequelize: S): typeof Apartment {
         return Apartment.init(
@@ -42,6 +45,7 @@ export class Apartment extends Model<InferAttributes<Apartment>, ApartmentCreati
             },
             {
                 sequelize: sequelize,
+                modelName: "apartment"
             },
         );
     }
