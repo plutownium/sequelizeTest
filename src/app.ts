@@ -7,6 +7,8 @@ import initModels from "./db/model/init-models";
 
 import UserController from "./routes/user.controller";
 import RTController from "./routes/refreshToken.controller";
+import ApartmentController from "./routes/ap.controller";
+import CityController from "./routes/city.controller";
 
 class App {
     public app: Application;
@@ -52,7 +54,7 @@ class App {
 
 const app = new App({
     port: 3000,
-    controllers: [new UserController(), new RTController()],
+    controllers: [new UserController(), new RTController(), new ApartmentController(), new CityController()],
 });
 
 export default app;

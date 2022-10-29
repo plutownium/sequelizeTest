@@ -13,7 +13,7 @@ class CityController {
         this.router.post("/create", this.createCity.bind(this));
         this.router.get("/all", this.getAllCities.bind(this));
         this.router.get("/by_ap_id", this.getCityByApartmentId.bind(this));
-        this.router.get("/by_city_id", this.getCityByCityId.bind(this));
+        // this.router.get("/by_city_id", this.getCityByCityId.bind(this));
     }
     public healthCheck(req: Request, res: Response) {
         return res.json({ msg: "on - city" });
@@ -21,6 +21,7 @@ class CityController {
 
     public async createCity(req: Request, res: Response) {
         const { latitude, longitude, address } = req.body;
+        console.log(latitude, longitude, address, "24rm");
         const createdCity = await this.cityDAO.createCity(latitude, longitude, address);
         return res.json({ city: createdCity });
     }
@@ -36,11 +37,11 @@ class CityController {
         return res.json({ city: city });
     }
 
-    public async getCityByCityId(req: Request, res: Response) {
-        const cityId = req.body.cityId;
-        const city = await this.cityDAO.getCitybyCityId(cityId);
-        return res.json({ city: city });
-    }
+    // public async getCityByCityId(req: Request, res: Response) {
+    //     const cityId = req.body.cityId;
+    //     const city = await this.cityDAO.getCitybyCityId(cityId);
+    //     return res.json({ city: city });
+    // }
 }
 export default CityController;
 // export default router;
