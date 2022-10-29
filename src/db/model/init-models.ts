@@ -11,16 +11,22 @@ function initModels(s: Sequelize) {
     const apartment = Apartment.initModel(s);
 
     u.hasMany(rt, {
-        foreignKey: "tokenId",
+        foreignKey: "userId",
         as: "their_refresh_tokens",
     });
     rt.belongsTo(u, {
-        foreignKey: "userId",
+        foreignKey: 'userId',
         as: "belongs_to_user",
     });
 
-    city.hasMany(apartment);
-    rt.belongsTo(city);
+    city.hasMany(apartment, {
+        foreignKey: 'cityId',
+        as: "its_apartments"
+    });
+    apartment.belongsTo(city, {
+        foreignKey: 'cityId',
+        as: "belongs_to_city"
+    });
 
     return { user: u, refreshToken: rt };
 }
