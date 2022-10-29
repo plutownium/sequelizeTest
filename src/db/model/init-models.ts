@@ -7,12 +7,12 @@ function initModels(s: Sequelize) {
     const rt = RefreshToken.initModel(s);
 
     u.hasMany(rt, {
-        foreignKey: "tokenId",
+        foreignKey: "userId",
         as: "their_refresh_tokens",
     });
 
     rt.belongsTo(u, {
-        foreignKey: "userId",
+        foreignKey: 'userId',
         as: "belongs_to_user",
     });
 
