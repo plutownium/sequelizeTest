@@ -1,7 +1,16 @@
-import Sequelize, { DataTypes, Optional, Sequelize as S, Model, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
-
-// export type CityPk = "cityId";
-// export type CityId = City[CityPk];
+import Sequelize, {
+    DataTypes,
+    Optional,
+    Sequelize as S,
+    Model,
+    ForeignKey,
+    InferAttributes,
+    InferCreationAttributes,
+    HasManyGetAssociationsMixin,
+    HasManyAddAssociationMixin,
+    HasManyRemoveAssociationMixin,
+} from "sequelize";
+import Apartment from "./Apartment";
 
 interface CityAttributes {
     cityId: number;
@@ -16,6 +25,10 @@ export class City extends Model<InferAttributes<City>, CityCreationAttributes> {
     public longitude!: number;
     public latitude!: number;
     public address!: string;
+
+    declare getApartments: HasManyGetAssociationsMixin<Apartment>;
+    declare addApartment: HasManyAddAssociationMixin<Apartment, number>;
+    declare removeApartment: HasManyRemoveAssociationMixin<Apartment, number>;
 
     static initModel(sequelize: S): typeof City {
         return City.init(
