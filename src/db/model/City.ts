@@ -1,7 +1,7 @@
 import Sequelize, { DataTypes, Optional, Sequelize as S, Model, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
 
-export type CityPk = "cityId";
-export type CityId = City[CityPk];
+// export type CityPk = "cityId";
+// export type CityId = City[CityPk];
 
 interface CityAttributes {
     cityId: number;
@@ -40,7 +40,7 @@ export class City extends Model<InferAttributes<City>, CityCreationAttributes> {
             },
             {
                 sequelize: sequelize,
-                modelName: "city"
+                modelName: "city",
             },
         );
     }

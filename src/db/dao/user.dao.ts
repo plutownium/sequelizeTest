@@ -16,7 +16,11 @@ class UserDAO {
     };
 
     public getUserByToken = (token: string) => {
-        // magic
+        // todo - get user by RefreshToken "token" field.
+    };
+
+    public getUserByTokenId = async (tokenId: number) => {
+        // todo;
     };
 
     public getUserByUserId = async (userId: string) => {

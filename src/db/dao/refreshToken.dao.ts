@@ -28,8 +28,10 @@ class RTDAO {
         return token[0];
     };
 
-    public getTokenByUserId = (userId: string) => {
+    public getTokenByUserId = async (userId: number) => {
         // when this works ur otw
+        const token = await RefreshToken.findAll({ where: { userId: userId }, include: ["belongs_to_user"] });
+        return token;
     };
 }
 

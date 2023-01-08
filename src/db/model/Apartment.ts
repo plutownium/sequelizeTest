@@ -1,9 +1,8 @@
 import Sequelize, { DataTypes, Optional, Sequelize as S, Model, ForeignKey, InferAttributes, InferCreationAttributes } from "sequelize";
 import City from "./City";
 
-
-export type ApartmentPk = "apartmentId";
-export type ApartmentId = Apartment[ApartmentPk];
+// export type ApartmentPk = "apartmentId";
+// export type ApartmentId = Apartment[ApartmentPk];
 
 interface ApartmentAttributes {
     apartmentId: number;
@@ -45,7 +44,7 @@ export class Apartment extends Model<InferAttributes<Apartment>, ApartmentCreati
             },
             {
                 sequelize: sequelize,
-                modelName: "apartment"
+                modelName: "apartment",
             },
         );
     }

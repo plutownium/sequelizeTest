@@ -26,7 +26,6 @@ class App {
         // this.middlewares(appInit.middlewares);
         this.controllers(appInit.controllers);
         // this.app.use("/api", getRoutes());
-        this.app.use;
     }
 
     public listen() {

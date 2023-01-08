@@ -1,4 +1,19 @@
-import Sequelize, { DataTypes, Sequelize as S, Model, Optional, InferAttributes, InferCreationAttributes, ForeignKey } from "sequelize";
+import Sequelize, {
+    DataTypes,
+    Sequelize as S,
+    Model,
+    Optional,
+    InferAttributes,
+    InferCreationAttributes,
+    ForeignKey,
+    HasManyAddAssociationMixin,
+    HasManyGetAssociationsMixin,
+    HasManyRemoveAssociationMixin,
+    HasOneGetAssociationMixin,
+    HasOneSetAssociationMixin,
+} from "sequelize";
+import Apartment from "./Apartment";
+import City from "./City";
 import RefreshToken from "./RefreshToken";
 
 export type UserPk = "userId";
@@ -18,6 +33,13 @@ export class User extends Model<InferAttributes<User>, UserCreationAttributes> {
     public email!: string;
     public firstName!: string;
     public tokenId!: ForeignKey<RefreshToken["tokenId"]>;
+
+    declare getCity: HasOneGetAssociationMixin<City>;
+    declare addCity: HasOneSetAssociationMixin<City, number>;
+
+    declare getApartments: HasManyGetAssociationsMixin<Apartment>;
+    declare addApartment: HasManyAddAssociationMixin<Apartment, number>;
+    declare removeApartment: HasManyRemoveAssociationMixin<Apartment, number>;
 
     static initModel(sequelize: S): typeof User {
         return User.init(

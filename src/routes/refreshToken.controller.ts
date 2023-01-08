@@ -38,8 +38,8 @@ class RTController {
     public async getTokenByUserId(req: Request, res: Response) {
         //
         const userId = req.body.userId;
-        // const f: RefreshToken = await rtDAO.getTokenByUserId(userId);
-        const f = "placeholder";
+        const f: RefreshToken[] = await this.rtDAO.getTokenByUserId(userId);
+        console.log(f, "43rm");
         return res.json({ token: f });
     }
 

@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import { HighlightSpanKind } from "typescript";
 import UserDAO from "../db/dao/user.dao";
 
 class UserController {
@@ -33,6 +34,12 @@ class UserController {
 
     public async getUserByToken(req: Request, res: Response) {
         const a = await this.uDAO.getUserByToken(req.body.token);
+        return res.json({ user: a });
+    }
+
+    public async getUserByTokenId(req: Request, res: Response) {
+        const tokenId = req.body.tokenId;
+        const a = await this.uDAO.getUserByTokenId(tokenId);
         return res.json({ user: a });
     }
 
